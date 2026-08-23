@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from banco.conexao import db, cursor
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "8e0bb8495a36e835f1cb2b075062546228be4dc487d0a4e32579ad563b5dc203"
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 
 # ROTA PRINCIPAL - METODO GET -----------------------
@@ -72,6 +76,9 @@ def listar_chamados():
     if "matricula" not in session:
         return redirect(url_for("login"))
 
+    if session["perfil"] != "TI":
+        return redirect(url_for("painel"))
+    
     cursor.execute(
         """
         SELECT id, titulo, categoria, prioridade, status
@@ -98,10 +105,10 @@ def meus_chamados():
         FROM chamados AS c
         JOIN usuarios AS u
             ON c.id_usuario = u.id
-        WHERE u.nome = %s
+        WHERE u.matricula = %s
         ORDER BY id DESC
         """,
-        (session["nome"],),
+        (session["matricula"],),
     )
     chamados = cursor.fetchall()
 
