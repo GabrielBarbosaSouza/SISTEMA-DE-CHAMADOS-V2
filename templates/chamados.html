@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Chamados - Sistema de Chamados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {background: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Lista de Chamados</h1>
+
+        {% if chamados %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Prioridade</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            {% for id, titulo, categoria, prioridade, status in chamados %}
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ titulo }}</td>
+                <td>{{ categoria }}</td>
+                <td>{{ prioridade }}</td>
+                <td>{{ status }}</td>
+                <td>
+                    {% if status == 'Aberto' %}
+                    <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}" style="display: inline;">
+                        <input type="hidden" name="acao" value="atender">
+                        <button type="submit">Atender</button>
+                    </form>
+                    {% endif %}
+
+                    {% if status != 'Fechado' %}
+                    <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}" style="display: inline;">
+                        <input type="hidden" name="acao" value="fechar">
+                        <button type="submit">Fechar</button>
+                    </form>
+                    {% endif %}
+
+                    {% if status == 'Fechado' %}
+                    <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}" style="display: inline;">
+                        <input type="hidden" name="acao" value="reabrir">
+                        <button type="submit">Reabrir</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>Nenhum chamado encontrado.</p>
+        {% endif %}
+
+        <p><a href="{{ url_for('painel') }}">Voltar ao painel</a></p>
+    </div>
+</body>
+</html>

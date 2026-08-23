@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema de Chamados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        p {
+            margin-top: 1.5rem;
+        }
+
+        .cards {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .card .numero {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .card .rotulo {
+            margin-top: 0.5rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+
+        <div class="cards">
+            <div class="card">
+                <div class="numero">{{ tot_usuarios }}</div>
+                <div class="rotulo">Total de usuários</div>
+            </div>
+
+            <div class="card">
+                <div class="numero">{{ tot_chamados }}</div>
+                <div class="rotulo">Total de chamados</div>
+            </div>
+
+            <div class="card">
+                <div class="numero">{{ chamados_abertos }}</div>
+                <div class="rotulo">Chamados abertos</div>
+            </div>
+
+            <div class="card">
+                <div class="numero">{{ chamados_fechados }}</div>
+                <div class="rotulo">Chamados fechados</div>
+            </div>
+        </div>
+
+        <p><a href="{{ url_for('painel') }}">Voltar ao painel</a></p>
+    </div>
+</body>
+</html>

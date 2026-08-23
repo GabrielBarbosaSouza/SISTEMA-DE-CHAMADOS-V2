@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel - Sistema de Chamados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 2rem;
+        }
+
+        .card {background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        a {color: #2563eb;
+            display: block;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Bem-vindo, {{ nome }}!</h1>
+        <p>Perfil: <strong>{{ perfil }}</strong></p>
+
+        {% if perfil == 'TI' %}
+            <a href="{{ url_for('listar_chamados') }}">Ver lista de todos os chamados</a>
+            <a href="{{ url_for('meus_chamados') }}">Ver os meus chamados</a>
+            <a href="{{ url_for('abrir_chamado') }}">Abrir novo chamado</a>
+            <a href="{{ url_for('cadastrar_usuario') }}">Cadastrar novo usuário</a>
+            <a href="{{ url_for('dashboard') }}">Ver dashboard</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+
+        {% else %}
+            <a href="{{ url_for('meus_chamados') }}">Ver os meus chamados</a>
+            <a href="{{ url_for('abrir_chamado') }}">Abrir novo chamado</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+
+        {% endif %}
+
+    </div>
+</body>
+</html>
