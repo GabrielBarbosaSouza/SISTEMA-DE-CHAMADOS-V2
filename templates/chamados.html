@@ -54,7 +54,7 @@
                 <th>Status</th>
                 <th>Ações</th>
             </tr>
-            {% for id, titulo, descricao, categoria, prioridade, status in chamados %}
+            {% for id, titulo, descricao, categoria, prioridade, status, data_abertura, data_fechamento in chamados %}
             <tr>
                 <td>{{ id }}</td>
                 <td>{{ titulo }}</td>
@@ -62,6 +62,8 @@
                 <td>{{ categoria }}</td>
                 <td>{{ prioridade }}</td>
                 <td>{{ status }}</td>
+                <td>{{ data_abertura }}</td>
+                <td>{{ data_fechamento }}</td>
                 <td>
                     {% if status == 'Aberto' %}
                     <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}" style="display: inline;">

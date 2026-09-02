@@ -82,7 +82,7 @@ def listar_chamados():
     
     cursor.execute(
         """
-        SELECT id, titulo, descricao, categoria, prioridade, status
+        SELECT id, titulo, descricao, categoria, prioridade, status, data_abertura, data_fechamento
         FROM chamados
         ORDER BY id DESC
         """
