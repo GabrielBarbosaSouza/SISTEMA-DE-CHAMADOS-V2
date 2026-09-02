@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from banco.conexao import db, cursor
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
+
+from banco.conexao import db, cursor
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
