@@ -17,6 +17,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             max-width: 800px;
             margin: 0 auto;
+            width: 90%;
         }
 
         a {
@@ -35,7 +36,8 @@
             border-bottom: 1px solid #ddd;
         }
 
-        th {background: #f8f8f8;
+        th {
+            background: #f8f8f8;
         }
     </style>
 </head>
@@ -52,6 +54,8 @@
                 <th>Categoria</th>
                 <th>Prioridade</th>
                 <th>Status</th>
+                <th>Data de Abertura</th>
+                <th>Data de Fechamento</th>
                 <th>Ações</th>
             </tr>
             {% for id, titulo, descricao, categoria, prioridade, status, data_abertura, data_fechamento in chamados %}
