@@ -2,71 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Chamados - Sistema de Chamados</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            padding: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        a {
-            color: #2563eb;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 0.5rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {background: #f8f8f8;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meus Chamados - Sistema de Chamados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="card">
+    <div class="card card--wide">
         <h1>Meus Chamados</h1>
 
         {% if chamados %}
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Categoria</th>
-                <th>Prioridade</th>
-                <th>Status</th>
-            </tr>
-            {% for id, titulo, categoria, prioridade, status in chamados %}
-            <tr>
-                <td>{{ id }}</td>
-                <td>{{ titulo }}</td>
-                <td>{{ categoria }}</td>
-                <td>{{ prioridade }}</td>
-                <td>{{ status }}</td>
-            </tr>
-            {% endfor %}
+        <table class="tabela-responsiva">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Categoria</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, titulo, categoria, prioridade, status in chamados %}
+                <tr>
+                    <td data-label="ID">{{ id }}</td>
+                    <td data-label="Título">{{ titulo }}</td>
+                    <td data-label="Categoria">{{ categoria }}</td>
+                    <td data-label="Prioridade">{{ prioridade }}</td>
+                    <td data-label="Status">{{ status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
         {% else %}
         <p>Nenhum chamado encontrado.</p>
         {% endif %}
 
-        <p><a href="{{ url_for('painel') }}">Voltar ao painel</a></p>
+        <a class="voltar" href="{{ url_for('painel') }}">Voltar ao painel</a>
     </div>
 </body>
 </html>

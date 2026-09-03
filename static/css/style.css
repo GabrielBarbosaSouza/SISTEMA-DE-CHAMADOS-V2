@@ -1,0 +1,265 @@
+/* ==========================================================
+   Sistema de Chamados — estilos compartilhados
+   ========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 2rem 1rem;
+    color: #1f2937;
+}
+
+a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+}
+
+/* ---------- Cartão base (login, formulários, painel) ---------- */
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.card--wide {
+    max-width: 900px;
+}
+
+/* Página de login: centraliza o cartão vertical e horizontalmente */
+.pagina-login {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pagina-login .card {
+    width: 100%;
+    max-width: 320px;
+}
+
+/* ---------- Menu do painel ---------- */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.menu a {
+    display: block;
+}
+
+/* ---------- Formulários ---------- */
+
+label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button,
+.botao {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.2rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover,
+.botao:hover {
+    background: #1d4ed8;
+}
+
+.erro {
+    color: #dc2626;
+    margin-top: 1rem;
+}
+
+/* Ações dentro da tabela (botões pequenos lado a lado) */
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.acoes form {
+    display: inline;
+}
+
+.acoes button {
+    margin-top: 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+/* ---------- Tabelas ---------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.6rem;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+th {
+    background: #f8f8f8;
+}
+
+/* ---------- Dashboard: cartões numéricos ---------- */
+
+.cards-resumo {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.cards-resumo .card {
+    flex: 1;
+    min-width: 150px;
+    max-width: none;
+    margin: 0;
+    text-align: center;
+}
+
+.cards-resumo .numero {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.cards-resumo .rotulo {
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.voltar {
+    display: block;
+    margin-top: 1.5rem;
+}
+
+/* ==========================================================
+   Responsivo — telas de celular (até 600px de largura)
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+        border-radius: 6px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    /* Cartões do dashboard: 2 colunas em vez de 4 em linha */
+    .cards-resumo {
+        gap: 0.75rem;
+    }
+
+    .cards-resumo .card {
+        min-width: calc(50% - 0.4rem);
+    }
+
+    /* ---- Tabela vira lista de "cartões" empilhados ---- */
+
+    table.tabela-responsiva,
+    table.tabela-responsiva thead,
+    table.tabela-responsiva tbody,
+    table.tabela-responsiva tr,
+    table.tabela-responsiva td {
+        display: block;
+        width: 100%;
+    }
+
+    table.tabela-responsiva thead {
+        /* Esconde o cabeçalho da tabela: os rótulos vão aparecer
+           em cada célula individualmente, via atributo data-label */
+        position: absolute;
+        left: -9999px;
+    }
+
+    table.tabela-responsiva tr {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    table.tabela-responsiva td {
+        border-bottom: none;
+        padding: 0.35rem 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        text-align: right;
+    }
+
+    /* Mostra o nome da coluna antes do valor, usando o
+       atributo data-label que colocamos em cada <td> */
+    table.tabela-responsiva td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-align: left;
+        color: #555;
+    }
+
+    table.tabela-responsiva td.acoes-cell {
+        justify-content: flex-start;
+    }
+
+    table.tabela-responsiva td.acoes-cell::before {
+        display: none;
+    }
+}

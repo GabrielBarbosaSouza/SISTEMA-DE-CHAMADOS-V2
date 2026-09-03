@@ -2,61 +2,15 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - Sistema de Chamados</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        a {
-            color: #2563eb;
-        }
-
-        p {
-            margin-top: 1.5rem;
-        }
-
-        .cards {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-        }
-
-        .card .numero {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        .card .rotulo {
-            margin-top: 0.5rem;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
+    <div class="card card--wide">
         <h1>Dashboard</h1>
 
-        <div class="cards">
+        <div class="cards-resumo">
             <div class="card">
                 <div class="numero">{{ tot_usuarios }}</div>
                 <div class="rotulo">Total de usuários</div>
@@ -78,7 +32,7 @@
             </div>
         </div>
 
-        <p><a href="{{ url_for('painel') }}">Voltar ao painel</a></p>
+        <a class="voltar" href="{{ url_for('painel') }}">Voltar ao painel</a>
     </div>
 </body>
 </html>
