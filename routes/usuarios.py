@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request
 from banco.conexao import cursor, db
 
-usuarios_bp = Blueprint("auth", __name__)
+usuarios_bp = Blueprint("usuarios", __name__)
 
 
 # ROTA PARA CADASTRAR USUÁRIOS - METODOS GET E POST: -----------------------
@@ -11,10 +11,10 @@ usuarios_bp = Blueprint("auth", __name__)
 def cadastrar_usuario():
 
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     if session["perfil"] != "TI":
-        return redirect(url_for("painel"))
+        return redirect(url_for("auth.painel"))
 
     erro = None
 
@@ -61,6 +61,6 @@ def cadastrar_usuario():
             )
             db.commit()
 
-            return redirect(url_for("painel"))
+            return redirect(url_for("auth.painel"))
 
     return render_template("cadastrar_usuario.html", erro=erro)

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request
 from banco.conexao import cursor, db
 
-chamados_bp = Blueprint("dashboard", __name__)
+chamados_bp = Blueprint("chamados", __name__)
 
 
 # ROTA DE CHAMADOS - METODO GET: ---------------------------------------
@@ -11,10 +11,10 @@ chamados_bp = Blueprint("dashboard", __name__)
 def listar_chamados():
 
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     if session["perfil"] != "TI":
-        return redirect(url_for("painel"))
+        return redirect(url_for("auth.painel"))
     
     cursor.execute(
         """
@@ -35,7 +35,7 @@ def listar_chamados():
 def meus_chamados():
 
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     cursor.execute(
         """
@@ -60,10 +60,10 @@ def meus_chamados():
 def mudar_status(id_chamado):
 
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     if session["perfil"] != "TI":
-        return redirect(url_for("painel"))
+        return redirect(url_for("auth.painel"))
 
     acao = request.form.get("acao")
 
@@ -74,7 +74,7 @@ def mudar_status(id_chamado):
     resultado = cursor.fetchone()
 
     if resultado is None:
-        return redirect(url_for("listar_chamados"))
+        return redirect(url_for("chamados.listar_chamados"))
 
     status_atual = resultado[0]
 
@@ -99,7 +99,7 @@ def mudar_status(id_chamado):
         )
         db.commit()
 
-    return redirect(url_for("listar_chamados"))
+    return redirect(url_for("chamados.listar_chamados"))
 
 # ROTA DE ABRIR CHAMADO - METODOS GET E POST: ----------------------
 # Rota onde os usuários abrem seus chamados.
@@ -108,7 +108,7 @@ def mudar_status(id_chamado):
 def abrir_chamado():
     
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     erro = None
 
@@ -146,6 +146,6 @@ def abrir_chamado():
             )
             db.commit()
 
-            return redirect(url_for("meus_chamados"))
+            return redirect(url_for("chamados.meus_chamados"))
 
     return render_template("abrir_chamado.html", erro=erro)

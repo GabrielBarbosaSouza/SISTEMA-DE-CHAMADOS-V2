@@ -12,8 +12,8 @@ autenticacao_bp = Blueprint("auth", __name__)
 def index(): 
     
     if "matricula" in session:
-        return redirect(url_for("painel"))
-    return redirect(url_for("login"))
+        return redirect(url_for("auth.painel"))
+    return redirect(url_for("auth.login"))
 
 
 # ROTA DE LOGIN - METODOS GET E POST --------------------------------------------------
@@ -45,7 +45,7 @@ def login():
                 session["nome"] = nome
                 session["matricula"] = matricula
                 session["perfil"] = perfil
-                return redirect(url_for("painel"))
+                return redirect(url_for("auth.painel"))
             else:
                 erro = "Usuário não encontrado."
 
@@ -59,7 +59,7 @@ def login():
 def painel():
     # Protege a rota: só entra quem já fez login
     if "matricula" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
     return render_template(
         "painel.html",
@@ -73,4 +73,4 @@ def painel():
 @autenticacao_bp.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("login"))
+    return redirect(url_for("auth.login"))

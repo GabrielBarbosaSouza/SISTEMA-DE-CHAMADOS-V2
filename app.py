@@ -11,8 +11,10 @@ from routes.usuarios import usuarios_bp
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-app.register_blueprint(dashboard_bp, autenticacao_bp, chamados_bp, usuarios_bp)
-
+app.register_blueprint(dashboard_bp)
+app.register_blueprint(autenticacao_bp)
+app.register_blueprint(chamados_bp)
+app.register_blueprint(usuarios_bp)
 
 if __name__ == "__main__":
     app.run(debug=True)

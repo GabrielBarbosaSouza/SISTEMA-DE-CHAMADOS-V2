@@ -18,11 +18,11 @@
                 <a href="{{ url_for('chamados.abrir_chamado') }}">Abrir novo chamado</a>
                 <a href="{{ url_for('usuarios.cadastrar_usuario') }}">Cadastrar novo usuário</a>
                 <a href="{{ url_for('dashboard.dashboard') }}">Ver dashboard</a>
-                <a href="{{ url_for('autenticacao.logout') }}">Sair</a>
+                <a href="{{ url_for('auth.logout') }}">Sair</a>
             {% else %}
                 <a href="{{ url_for('chamados.meus_chamados') }}">Ver os meus chamados</a>
                 <a href="{{ url_for('chamados.abrir_chamado') }}">Abrir novo chamado</a>
-                <a href="{{ url_for('autenticacao.logout') }}">Sair</a>
+                <a href="{{ url_for('auth.logout') }}">Sair</a>
             {% endif %}
         </nav>
     </div>
