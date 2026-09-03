@@ -39,21 +39,21 @@
                     <td class="acoes-cell" data-label="Ações">
                         <div class="acoes">
                             {% if status == 'Aberto' %}
-                            <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}">
+                            <form method="POST" action="{{ url_for('chamados.mudar_status', id_chamado=id) }}">
                                 <input type="hidden" name="acao" value="atender">
                                 <button type="submit">Atender</button>
                             </form>
                             {% endif %}
 
                             {% if status != 'Fechado' %}
-                            <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}">
+                            <form method="POST" action="{{ url_for('chamados.mudar_status', id_chamado=id) }}">
                                 <input type="hidden" name="acao" value="fechar">
                                 <button type="submit">Fechar</button>
                             </form>
                             {% endif %}
 
                             {% if status == 'Fechado' %}
-                            <form method="POST" action="{{ url_for('mudar_status', id_chamado=id) }}">
+                            <form method="POST" action="{{ url_for('chamados.mudar_status', id_chamado=id) }}">
                                 <input type="hidden" name="acao" value="reabrir">
                                 <button type="submit">Reabrir</button>
                             </form>
@@ -68,7 +68,7 @@
         <p>Nenhum chamado encontrado.</p>
         {% endif %}
 
-        <a class="voltar" href="{{ url_for('painel') }}">Voltar ao painel</a>
+        <a class="voltar" href="{{ url_for('autenticacao.painel') }}">Voltar ao painel</a>
     </div>
 </body>
 </html>
